@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        jdk 'JDK17'
+        jdk 'jdk17'
         maven 'Maven3'
     }
 
@@ -52,7 +52,10 @@ pipeline {
                 publishHTML([
                     reportDir: 'target/allure-report',
                     reportFiles: 'index.html',
-                    reportName: 'Allure Report'
+                    reportName: 'Allure Report',
+                    keepAll: true,
+                    alwaysLinkToLastBuild: true,
+                    allowMissing: false
                 ])
             }
         }
