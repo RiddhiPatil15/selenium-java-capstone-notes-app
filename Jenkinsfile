@@ -6,10 +6,6 @@ pipeline {
         maven 'Maven_Latest'
     }
 
-    environment {
-        PROJECT_DIR = "${WORKSPACE}"
-    }
-
     stages {
 
         stage('Checkout Code') {
@@ -47,15 +43,15 @@ pipeline {
             }
         }
 
-        stage('Publish Reports') {
+        stage('Publish HTML Report') {
             steps {
                 publishHTML([
                     reportDir: 'target/allure-report',
                     reportFiles: 'index.html',
                     reportName: 'Allure Report',
-                    keepAll: true,
+                    allowMissing: true,
                     alwaysLinkToLastBuild: true,
-                    allowMissing: false
+                    keepAll: true
                 ])
             }
         }
